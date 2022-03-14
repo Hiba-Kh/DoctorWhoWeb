@@ -17,9 +17,11 @@ namespace DoctorWho.Db
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<ViewEpisodes> ViewEpisodes { get; set; }
 
+        public DoctorWhoCoreDbContext(DbContextOptions<DoctorWhoCoreDbContext> options) :base(options)
+        {}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
+         //   optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

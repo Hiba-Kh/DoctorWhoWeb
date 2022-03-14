@@ -1,10 +1,20 @@
+using AutoMapper;
+using DoctorWho.Db;
+using DoctorWho.Db.Domain.Services;
+using DoctorWho.Db.Repositories;
+using DoctorWho.Domain;
+using DoctorWho.Web.Controllers.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using Microsoft.Extensions.Logging;
+using Supermarket.API.Domain.Repositories;
+using Supermarket.API.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +35,16 @@ namespace DoctorWho.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<DoctorWhoCoreDbContext>(options =>
+            {
+                options.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
+            });
+           
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

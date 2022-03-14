@@ -14,7 +14,5 @@ namespace DoctorWho.Db.Models
         public DateTime LastEpisodeDate { get; set; }
         public List<Episode> Episodes { get; set; }
 
-
-
     }
 }

@@ -15,7 +15,6 @@ namespace DoctorWho.Web.Controllers.Services
         private readonly IDoctorRepository doctorRepository;
         private readonly IUnitOfWork unitOfWork;
 
-
         public DoctorService(IDoctorRepository doctorRepository, IUnitOfWork unitOfWork)
         {
             this.doctorRepository = doctorRepository;
@@ -32,11 +31,10 @@ namespace DoctorWho.Web.Controllers.Services
             return doctorRepository.DoctorExists(id);
         }
 
-        public async Task SaveAsync(Doctor doctor)
+        public async Task CreateDoctorAsync(Doctor doctor)
         {
             await doctorRepository.AddAsync(doctor);
             await unitOfWork.CompleteAsync();
-            unitOfWork.Complete();
         }
 
         public async Task<Doctor> GetDoctorAsync(int id)

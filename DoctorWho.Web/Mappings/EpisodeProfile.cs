@@ -12,9 +12,8 @@ namespace DoctorWho.Web.Mappings
     {
         public EpisodeProfile()
         {
-            CreateMap<Episode, EpisodeResource>();//.ForMember(
-             //   dst => dst.DoctorName,
-            //    opt => opt.MapFrom(src => src.Doctor.DoctorName));
+            CreateMap<Episode, EpisodeResource>();
+            CreateMap<EpisodeCreationResource, Episode>();
                                     
                 
         }

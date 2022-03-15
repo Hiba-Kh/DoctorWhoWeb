@@ -64,7 +64,7 @@ namespace DoctorWho.Web.Controllers
             { //upsert
                 var doctorToAdd = mapper.Map<Doctor>(doctor);
                 doctorToAdd.DoctorId = doctorId;
-                await doctorService.SaveAsync(doctorToAdd);
+                await doctorService.CreateDoctorAsync(doctorToAdd);
                 var courseResource = mapper.Map<DoctorResource>(doctorToAdd);
                 return CreatedAtRoute("GetDoctor", new { doctorId }, courseResource);
             }

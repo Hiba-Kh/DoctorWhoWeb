@@ -11,7 +11,7 @@ namespace DoctorWho.Domain
         Task AddAsync(Doctor doctor);
         void Update(Doctor doctor);
         void Remove(Doctor doctor);
-        Task<IEnumerable<Doctor>> ListAsync();
+        Task<IEnumerable<Doctor>> ListAllAsync();
         bool DoctorExists(int id);
         Task<Doctor> FindByIdAsync(int id);
     }

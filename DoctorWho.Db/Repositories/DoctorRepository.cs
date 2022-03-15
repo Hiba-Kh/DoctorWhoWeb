@@ -32,7 +32,7 @@ namespace DoctorWho.Db.Repositories
         {
             Context.Doctors.Remove(doctor);
         }
-        public async Task<IEnumerable<Doctor>> ListAsync()
+        public async Task<IEnumerable<Doctor>> ListAllAsync()
         {
             return await Context.Doctors.ToListAsync();
         }

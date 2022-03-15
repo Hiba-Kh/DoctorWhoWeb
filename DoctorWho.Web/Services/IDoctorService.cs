@@ -8,10 +8,10 @@ namespace DoctorWho.Db.Domain.Services
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<Doctor>> ListAsync();
+        Task<IEnumerable<Doctor>> GetDoctorsAsync();
         bool DoctorExists(int id);
         Task SaveAsync(Doctor doctor);
-        Task<Doctor> GetDoctor(int id);
+        Task<Doctor> GetDoctorAsync(int id);
         void UpdateDoctor(Doctor doctor);
         void DeleteDoctor(Doctor doctor);
 

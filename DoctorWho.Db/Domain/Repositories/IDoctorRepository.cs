@@ -12,5 +12,7 @@ namespace DoctorWho.Domain
         void Update(Doctor doctor);
         void Remove(Doctor doctor);
         Task<IEnumerable<Doctor>> ListAsync();
+        bool DoctorExists(int id);
+        Task<Doctor> FindByIdAsync(int id);
     }
 }

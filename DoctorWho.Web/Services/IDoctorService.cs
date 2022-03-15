@@ -9,5 +9,10 @@ namespace DoctorWho.Db.Domain.Services
     public interface IDoctorService
     {
         Task<IEnumerable<Doctor>> ListAsync();
+        bool DoctorExists(int id);
+        Task SaveAsync(Doctor doctor);
+        Task<Doctor> GetDoctorAsync(int id);
+        void UpdateDoctor(Doctor doctor);
+
     }
 }

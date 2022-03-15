@@ -39,7 +39,7 @@ namespace DoctorWho.Web.Controllers.Services
             unitOfWork.Complete();
         }
 
-        public async Task<Doctor> GetDoctorAsync(int id)
+        public async Task<Doctor> GetDoctor(int id)
         {
             return await doctorRepository.FindByIdAsync(id);
         }
@@ -47,6 +47,12 @@ namespace DoctorWho.Web.Controllers.Services
         public void UpdateDoctor(Doctor doctor)
         {
             doctorRepository.Update(doctor);
+            unitOfWork.CompleteAsync();
+        }
+
+        public void DeleteDoctor(Doctor doctor)
+        {
+            doctorRepository.Remove(doctor);
             unitOfWork.CompleteAsync();
         }
     }

@@ -56,7 +56,8 @@ namespace DoctorWho.Web
             services.AddScoped<IEnemyService, EnemyService>();
             services.AddScoped<IEpisodeService, EpisodeService>();
             services.AddScoped<ICompanionService, CompanionService>();
-
+            services.AddScoped<IAuthorService, AuthorService>();
+            
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }

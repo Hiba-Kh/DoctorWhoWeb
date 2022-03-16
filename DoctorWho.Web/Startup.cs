@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using Microsoft.Extensions.Logging;
 using Supermarket.API.Domain.Repositories;
 using Supermarket.API.Persistence.Repositories;
@@ -40,7 +39,8 @@ namespace DoctorWho.Web
             services.AddControllers();
             services.AddDbContext<DoctorWhoCoreDbContext>(options =>
             {
-                options.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"))
+                  .EnableSensitiveDataLogging();
             });
            
             services.AddScoped<IDoctorRepository, DoctorRepository>();

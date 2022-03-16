@@ -48,11 +48,15 @@ namespace DoctorWho.Web
             services.AddScoped<IEpisodeRepository, EpisodeRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IEpisodeService, EpisodeService>();
+            services.AddScoped<ICompanionRepository, CompanionRepository>();
             services.AddScoped<IEnemyRepository, EnemyRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IEnemyService, EnemyService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IEpisodeService, EpisodeService>();
+            services.AddScoped<ICompanionService, CompanionService>();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         }

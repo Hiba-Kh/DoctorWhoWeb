@@ -42,5 +42,11 @@ namespace DoctorWho.Db.Repositories
             var episodeCompanionJoin = new EpisodeCompanion() {EpisodeId = episodeId, CompanionId = companionId };
             Context.Add(episodeCompanionJoin);
         }
+
+        public bool CompanionEpisodeExists(int episodeId, int companionId)
+        {
+            var companion = Context.Episodes.Where(e => e.EpisodeId == episodeId).Where(e => e.EpisodeCompanions.Any(ec => ec.CompanionId == companionId));
+            return companion.Any();
+        }
     }
 }

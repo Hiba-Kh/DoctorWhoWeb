@@ -25,6 +25,11 @@ namespace DoctorWho.Web.Controllers.Services
             await unitOfWork.CompleteAsync();
         }
 
+        public bool CompanionEpisodeExists(int episodeId, int companionId)
+        {
+            return companionRepository.CompanionEpisodeExists(episodeId, companionId);
+        }
+
         public bool CompanionExists(int id)
         {
             return companionRepository.CompanionExists(id);

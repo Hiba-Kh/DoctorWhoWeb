@@ -14,5 +14,6 @@ namespace DoctorWho.Domain
         Task<Companion> FindByIdAsync(int id);
         bool CompanionExists(int id);
         void AddCompanionToEpisode(int episodeId, int companionId);
+        bool CompanionEpisodeExists(int episodeId, int companionId);
     }
 }

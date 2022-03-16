@@ -9,5 +9,7 @@ namespace DoctorWho.Web.Services
     {
         bool CompanionExists(int id);
         Task AddCompanionToEpisodeAsync(int episodeId, int companionId);
+        bool CompanionEpisodeExists(int episodeId, int companionId);
     }
 }
+

@@ -19,13 +19,15 @@ namespace DoctorWho.Web.Controllers
     {
         private readonly IEpisodeService episodeService;
         private readonly IEnemyService enemyService;
+        private readonly ICompanionService companionService;
         private readonly IMapper mapper;
 
-        public EpisodesController(IEpisodeService episodeService, IMapper mapper, IEnemyService enemyService)
+        public EpisodesController(IEpisodeService episodeService, IMapper mapper, IEnemyService enemyService, ICompanionService companionService)
         {
             this.episodeService = episodeService;
             this.mapper = mapper;
             this.enemyService = enemyService;
+            this.companionService = companionService;
         }
 
         [HttpGet]
@@ -79,15 +81,20 @@ namespace DoctorWho.Web.Controllers
         [HttpPost("{episodeId}/companions")]
         public async Task<ActionResult<int>> AddCompanionToEpisode(int episodeId, CompanionResource companion)
         {
-            //if (!episodeService.EpisodeExists(episodeId))
-            //{
-            //    return NotFound("No such Episode");
-            //}
-            //if (!enemyService.EnemyExists(enemy.EnemyId.Value))
-            //{
-            //    return NotFound("No such Enemy");
-            //}
-            //await enemyService.AddEnemyToEpisodeAsync(episodeId, enemy.EnemyId.Value);
+
+            if (!episodeService.EpisodeExists(episodeId))
+            {
+                return NotFound("No such Episode");
+            }
+            if (!companionService.CompanionExists(companion.CompanionId.Value))
+            {
+                return NotFound("No such Companion");
+            }
+            if (companionService.CompanionEpisodeExists(episodeId, companion.CompanionId.Value))
+            {
+                return BadRequest("This Episode already has this Companion");
+            }
+            await companionService.AddCompanionToEpisodeAsync(episodeId, companion.CompanionId.Value);
             return Ok();
         }
     }

@@ -13,6 +13,7 @@ namespace DoctorWho.Web.Mappings
         public DoctorProfile()
         {
             CreateMap<Doctor, DoctorResource>();
+            CreateMap<DoctorManipulationResource, Doctor>();
         }
     }
 }

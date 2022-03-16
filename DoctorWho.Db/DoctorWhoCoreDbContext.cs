@@ -1,11 +1,11 @@
 ﻿using DoctorWho.Db.Mappings;
 using DoctorWho.Db.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 namespace DoctorWho.Db
 {
     public class DoctorWhoCoreDbContext : DbContext
@@ -17,12 +17,21 @@ namespace DoctorWho.Db
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<ViewEpisodes> ViewEpisodes { get; set; }
 
+        public static readonly ILoggerFactory ConsoleLoggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter((category, level) =>   
+            category == DbLoggerCategory.Database.Command.Name
+            && level == LogLevel.Information)
+            .AddConsole();
+        });
         public DoctorWhoCoreDbContext(DbContextOptions<DoctorWhoCoreDbContext> options) :base(options)
         {}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-         //   optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
+            optionsBuilder.UseLoggerFactory(ConsoleLoggerFactory).EnableSensitiveDataLogging();
+            //   optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = DoctorWhoCore");
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +47,9 @@ namespace DoctorWho.Db
             modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext).GetMethod(nameof(fnCompanion), new[] { typeof(int) }));
             modelBuilder.Entity<FnEnemiesResult>().HasNoKey();
             modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext).GetMethod(nameof(fnEnemies), new[] { typeof(int) }));
+
+            //SET IDENTITY_INSERT Doctors ON 
+           // modelBuilder.Entity<Doctor>().Property(d => d.DoctorId).ValueGeneratedOnAddOrUpdate();//.ValueGeneratedOnAdd();
         }
         public IQueryable<FnCompanionsResult> fnCompanion(int episodeId) => FromExpression(() => fnCompanion(episodeId));
         public IQueryable<FnEnemiesResult> fnEnemies(int episodeId) => FromExpression(() => fnEnemies(episodeId));

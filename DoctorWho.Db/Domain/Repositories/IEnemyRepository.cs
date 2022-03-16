@@ -12,5 +12,8 @@ namespace DoctorWho.Domain
         void Update(Enemy enemy);
         void Remove(Enemy enemy);
         Task<Enemy> FindByIdAsync(int id);
+        bool EnemyExists(int id);
+        void AddEnemyToEpisode(int episodeId, int enemyId);
+        bool EnemyEpisodeExists(int episodeId, int enemyId);
     }
 }

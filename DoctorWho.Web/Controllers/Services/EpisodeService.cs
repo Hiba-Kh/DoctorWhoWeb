@@ -38,9 +38,21 @@ namespace DoctorWho.Web.Controllers.Services
             return episode.EpisodeId;
         }
 
+        public async Task<Episode> GetEpisodeAsync(int id)
+        {
+            return await episodeRepository.FindByIdAsync(id);
+        }
+
         public async Task<IEnumerable<Episode>> GetEpisodesAsync()
         {
             return await episodeRepository.ListAllAsync();
         }
+
+        public bool EpisodeExists(int episodeId)
+        {
+            return episodeRepository.EpisodeExists(episodeId);
+        }
+
+
     }
 }

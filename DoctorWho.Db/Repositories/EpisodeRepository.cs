@@ -1,7 +1,9 @@
-﻿using DoctorWho.Domain;
+﻿using DoctorWho.Db.Models;
+using DoctorWho.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +36,11 @@ namespace DoctorWho.Db.Repositories
         public async Task<IEnumerable<Episode>> ListAllAsync()
         {
             return await Context.Episodes.ToListAsync();
+        }
+
+        public bool EpisodeExists(int id)
+        {
+            return Context.Episodes.Any(e => e.EpisodeId == id);
         }
     }
 }

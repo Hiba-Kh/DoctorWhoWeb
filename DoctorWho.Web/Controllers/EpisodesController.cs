@@ -18,12 +18,14 @@ namespace DoctorWho.Web.Controllers
     public class EpisodesController : ControllerBase
     {
         private readonly IEpisodeService episodeService;
+        private readonly IEnemyService enemyService;
         private readonly IMapper mapper;
 
-        public EpisodesController(IEpisodeService episodeService, IMapper mapper)
+        public EpisodesController(IEpisodeService episodeService, IMapper mapper, IEnemyService enemyService)
         {
             this.episodeService = episodeService;
             this.mapper = mapper;
+            this.enemyService = enemyService;
         }
 
         [HttpGet]
@@ -55,5 +57,38 @@ namespace DoctorWho.Web.Controllers
             return Ok($"Episode Id: {id}");
         }
 
+        [HttpPost("{episodeId}/enemies")]
+        public async Task<ActionResult<int>> AddEnemyToEpisode(int episodeId, EnemyResource enemy)
+        {
+            if (!episodeService.EpisodeExists(episodeId))
+            {
+                return NotFound("No such Episode");
+            }
+            if (!enemyService.EnemyExists(enemy.EnemyId.Value))
+            {
+                return NotFound("No such Enemy");
+            }
+            if (enemyService.EnemyEpisodeExists(episodeId, enemy.EnemyId.Value))
+            {
+                return BadRequest("This Episode already has this Enemy");
+            }
+            await enemyService.AddEnemyToEpisodeAsync(episodeId, enemy.EnemyId.Value);
+            return Ok();
+        }
+
+        [HttpPost("{episodeId}/companions")]
+        public async Task<ActionResult<int>> AddCompanionToEpisode(int episodeId, CompanionResource companion)
+        {
+            //if (!episodeService.EpisodeExists(episodeId))
+            //{
+            //    return NotFound("No such Episode");
+            //}
+            //if (!enemyService.EnemyExists(enemy.EnemyId.Value))
+            //{
+            //    return NotFound("No such Enemy");
+            //}
+            //await enemyService.AddEnemyToEpisodeAsync(episodeId, enemy.EnemyId.Value);
+            return Ok();
+        }
     }
 }

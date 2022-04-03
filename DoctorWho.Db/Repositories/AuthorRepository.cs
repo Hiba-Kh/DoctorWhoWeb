@@ -25,7 +25,6 @@ namespace DoctorWho.Db.Repositories
         {
             Context.Authors.Remove(author);
         }
-
         public bool AuthorExists(int id)
         {
             return Context.Authors.Any(a => a.AuthorId == id);

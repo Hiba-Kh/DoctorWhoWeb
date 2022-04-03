@@ -10,5 +10,7 @@ namespace DoctorWho.Web.Services
     {
         Task<IEnumerable<Episode>> GetEpisodesAsync();
         Task<int> CreateEpisodeAsync(Episode episode);
+        Task<Episode> GetEpisodeAsync(int id);
+        bool EpisodeExists(int episodeId);
     }
 }

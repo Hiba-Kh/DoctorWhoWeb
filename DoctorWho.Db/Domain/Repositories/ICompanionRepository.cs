@@ -12,5 +12,7 @@ namespace DoctorWho.Domain
         void Update(Companion companion);
         void Remove(Companion companion);
         Task<Companion> FindByIdAsync(int id);
+        bool CompanionExists(int id);
+        void AddCompanionToEpisode(int episodeId, int companionId);
     }
 }

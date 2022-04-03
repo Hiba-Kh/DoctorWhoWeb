@@ -44,11 +44,14 @@ namespace DoctorWho.Web
             });
            
             services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IDoctorService, DoctorService>();
+           
             services.AddScoped<IEpisodeRepository, EpisodeRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IEpisodeService, EpisodeService>();
+            services.AddScoped<IEnemyRepository, EnemyRepository>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IEnemyService, EnemyService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

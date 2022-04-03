@@ -11,5 +11,6 @@ namespace DoctorWho.Domain
         Task AddAsync(Author author);
         void Update(Author author);
         void Remove(Author author);
+        bool AuthorExists(int id);
     }
 }

@@ -2,6 +2,7 @@
 using DoctorWho.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace DoctorWho.Db.Repositories
@@ -23,6 +24,11 @@ namespace DoctorWho.Db.Repositories
         public void Remove(Author author)
         {
             Context.Authors.Remove(author);
+        }
+
+        public bool AuthorExists(int id)
+        {
+            return Context.Authors.Any(a => a.AuthorId == id);
         }
     }
 }

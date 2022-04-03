@@ -12,5 +12,6 @@ namespace DoctorWho.Domain
         void Update(Episode episode);
         void Remove(Episode episode);
         Task<Episode> FindByIdAsync(int id);
+        Task<IEnumerable<Episode>> ListAllAsync();
     }
 }

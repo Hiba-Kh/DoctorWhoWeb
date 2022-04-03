@@ -33,7 +33,7 @@ namespace DoctorWho.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<DoctorResource>> GetDoctors()
         {
-            var doctors = doctorService.ListAsync().Result;
+            var doctors = doctorService.GetDoctorsAsync().Result;
             var doctorsResources = mapper.Map<IEnumerable<DoctorResource>>(doctors);
             return Ok(doctorsResources);
         }
@@ -41,7 +41,7 @@ namespace DoctorWho.Web.Controllers
         [HttpGet("{doctorId}", Name = "GetDoctor")]
         public async Task<ActionResult<DoctorResource>> GetDoctor(int doctorId)
         {
-            var doctor = await doctorService.GetDoctor(doctorId);
+            var doctor = await doctorService.GetDoctorAsync(doctorId);
             if (doctor == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace DoctorWho.Web.Controllers
         [HttpPut("{doctorId}")]
         public async Task<IActionResult> UpdateOrCreateDoctor(int doctorId, DoctorManipulationResource doctor)
         {
-            var doctorToUpdate = await doctorService.GetDoctor(doctorId);
+            var doctorToUpdate = await doctorService.GetDoctorAsync(doctorId);
             var doctorValidator = new DoctorManipulationResourceValidator();
             ValidationResult result = doctorValidator.Validate(doctor);
             if(!result.IsValid)
@@ -76,7 +76,7 @@ namespace DoctorWho.Web.Controllers
         [HttpDelete("{doctorId}")]
         public async Task<ActionResult> DeleteDoctor(int doctorId)
         {
-            var doctorToDelete = await doctorService.GetDoctor(doctorId);
+            var doctorToDelete = await doctorService.GetDoctorAsync(doctorId);
             if (doctorToDelete == null)
             {
                 return NotFound();

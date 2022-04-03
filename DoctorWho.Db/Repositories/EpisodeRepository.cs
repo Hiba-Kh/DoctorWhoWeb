@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,6 +29,11 @@ namespace DoctorWho.Db.Repositories
         public async Task<Episode> FindByIdAsync(int id)
         {
             return await Context.Episodes.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Episode>> ListAllAsync()
+        {
+            return await Context.Episodes.ToListAsync();
         }
     }
 }

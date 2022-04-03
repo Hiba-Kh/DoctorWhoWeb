@@ -22,9 +22,9 @@ namespace DoctorWho.Web.Controllers.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Doctor>> ListAsync()
+        public async Task<IEnumerable<Doctor>> GetDoctorsAsync()
         {
-            return await doctorRepository.ListAsync();
+            return await doctorRepository.ListAllAsync();
         }
 
         public bool DoctorExists(int id)
@@ -39,7 +39,7 @@ namespace DoctorWho.Web.Controllers.Services
             unitOfWork.Complete();
         }
 
-        public async Task<Doctor> GetDoctor(int id)
+        public async Task<Doctor> GetDoctorAsync(int id)
         {
             return await doctorRepository.FindByIdAsync(id);
         }

@@ -11,8 +11,9 @@ namespace DoctorWho.Db.Domain.Services
         Task<IEnumerable<Doctor>> ListAsync();
         bool DoctorExists(int id);
         Task SaveAsync(Doctor doctor);
-        Task<Doctor> GetDoctorAsync(int id);
+        Task<Doctor> GetDoctor(int id);
         void UpdateDoctor(Doctor doctor);
+        void DeleteDoctor(Doctor doctor);
 
     }
 }
